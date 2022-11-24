@@ -30,6 +30,9 @@ const options = {
   minuteIncrement: 1,
   onOpen() {
     refs.buttonStartRef.setAttribute('disabled', true);
+    refs.value.forEach(element => {
+      element.classList.remove('time-finished');
+    });
   },
   onClose(selectedDates) {
     // console.log(selectedDates[0]);
