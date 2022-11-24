@@ -1,0 +1,39 @@
+.timer {
+  display: flex;
+  gap: 4px;
+  height: 70vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  border: solid lightgrey;
+}
+
+.value {
+  font-size: 54;
+  font-family: 'Audiowide', cursive;
+}
+
+.label {
+  font-family: 'Audiowide', cursive;
+  font-size: 18;
+  text-transform: uppercase;
+}
+
+.btn {
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.input {
+  height: 27px;
+}
+
+.time-finished {
+  color: red;
+}
