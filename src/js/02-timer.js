@@ -34,6 +34,11 @@ const options = {
       element.classList.remove('time-finished');
     });
   },
+  onChange() {
+    if (timer.intervalId !== null) {
+      Notiflix.Notify.warning('Timer cannot be restarted. Reload the page');
+    }
+  },
   onClose(selectedDates) {
     // console.log(selectedDates[0]);
     if (selectedDates[0] < new Date()) {
@@ -62,11 +67,16 @@ class Timer {
   constructor({ onTick }) {
     this.intervalId = null;
     this.onTick = onTick;
+    this.isActive = false;
   }
 
   start() {
+    if (this.isActive) {
+      refs.buttonStartRef.setAttribute('disabled', true);
+      return;
+    }
     refs.buttonStartRef.setAttribute('disabled', true);
-    
+    this.isActive = true;
     const savedSelectedDate = localStorage.getItem("selectedDate");
     const parsedSelectedDate = Number(JSON.parse(savedSelectedDate));
 
@@ -77,7 +87,9 @@ class Timer {
       this.onTick(timeLeft);
 
       if (deltaTime < 1000) {
+        this.isActive = false;
         clearInterval(this.intervalId);
+        this.intervalId = null;
         refs.value.forEach(element => {
           element.classList.add('time-finished');
         });
