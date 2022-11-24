@@ -25,6 +25,7 @@ const clickStart = () => {
 
 
 // додаємо слухача на кнопку старт й встановлюємо інтервал
+let timerId = null;
 buttonStartRef.addEventListener("click", () => {
   timerId = setInterval(() => clickStart(), 1000);
 });
