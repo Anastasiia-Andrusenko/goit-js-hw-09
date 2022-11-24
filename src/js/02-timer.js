@@ -36,18 +36,16 @@ const options = {
   },
   onChange() {
     if (timer.intervalId !== null) {
-      Notiflix.Notify.warning('Timer cannot be restarted. Reload the page');
+      Notiflix.Notify.warning('Timer cannot be restarted. Reload this page');
     }
   },
   onClose(selectedDates) {
-    // console.log(selectedDates[0]);
     if (selectedDates[0] < new Date()) {
       Notiflix.Notify.failure('Please choose a date in the future');
       return;
     }
     refs.buttonStartRef.removeAttribute('disabled');
     const selectedDate = selectedDates[0].getTime();
-    // console.log(selectedDate);
     localStorage.setItem("selectedDate", JSON.stringify(selectedDate));
   },
 };
@@ -100,19 +98,14 @@ class Timer {
 
   // функція перевода часу з мс в години, дні і тд
   convertMs(ms) {
-  // Number of milliseconds per unit of time
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;
   const day = hour * 24;
 
-  // Remaining days
   const days = this.addLeadingZero(Math.floor(ms / day));
-  // Remaining hours
   const hours = this.addLeadingZero(Math.floor((ms % day) / hour));
-  // Remaining minutes
   const minutes = this.addLeadingZero(Math.floor(((ms % day) % hour) / minute));
-  // Remaining seconds
   const seconds = this.addLeadingZero(Math.floor((((ms % day) % hour) % minute) / second));
 
   return { days, hours, minutes, seconds };
@@ -127,7 +120,6 @@ class Timer {
 const timer = new Timer({
   onTick: updateClockFace,
 });
-
 
 // Вішаємо слухача на кнопку
 refs.buttonStartRef.addEventListener("click", timer.start.bind(timer));

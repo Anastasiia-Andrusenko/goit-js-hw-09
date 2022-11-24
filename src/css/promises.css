@@ -1,0 +1,24 @@
+.form__label {
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+  gap: 6px;
+  align-items: flex-end;
+  height: 35vh;
+  justify-content: center;
+}
+
+.btn {
+  padding: 6px 10px;
+  font-size: medium;
+  cursor: pointer;
+}
+
+input {
+  height: 34px;
+  font-size: medium;
+  min-width: 80px;
+}
