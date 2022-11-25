@@ -36,7 +36,7 @@ const options = {
   },
   onChange() {
     if (timer.intervalId !== null) {
-      Notiflix.Notify.warning('Timer cannot be restarted. Reload this page');
+      Notiflix.Notify.warning('Timer cannot be restarted. Wait for the end');
     }
   },
   onClose(selectedDates) {
@@ -61,6 +61,7 @@ function updateClockFace({ days, hours, minutes, seconds }) {
   refs.seconds.textContent = seconds;
 }
 
+// описуэмо клас Таймер
 class Timer {
   constructor({ onTick }) {
     this.intervalId = null;
@@ -88,6 +89,7 @@ class Timer {
         this.isActive = false;
         clearInterval(this.intervalId);
         this.intervalId = null;
+        localStorage.removeItem('selectedDate');
         refs.value.forEach(element => {
           element.classList.add('time-finished');
         });
@@ -117,9 +119,22 @@ class Timer {
   };
 }
 
+// створюэмо таймер
 const timer = new Timer({
   onTick: updateClockFace,
 });
 
+
 // Вішаємо слухача на кнопку
 refs.buttonStartRef.addEventListener("click", timer.start.bind(timer));
+
+
+// Функція для продовженя відліку після перезагрузки сторінки
+function updatePage() {
+  const savedSelectedDate = localStorage.getItem("selectedDate");
+  if (savedSelectedDate) {
+    timer.start();
+  };
+};
+
+updatePage();
